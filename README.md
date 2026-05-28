@@ -3,14 +3,14 @@
 ## Project Overview
 I deployed a public-facing SSH honeypot on a residential network using Cowrie and Docker to collect and analyze the data from it. My goal for this project was to observe and analyze attacker activity on a normal network to better understand how attackers and automated systems behave in the real world.
 
-During the 72-hour collection period, the honeypot received 36,433 events through Cowrie and 5,672 connected SSH sessions from around the world, trying to sign in, execute commands, or download payloads. I collected this data, then processed and visualized it using spreadsheets and charts to allow a deeper understanding and further analysis.
+During the 72-hour collection period, the honeypot received 36,433 total events and 5,672 connected SSH sessions from around the world, trying to sign in, execute commands, or download payloads. I collected this data, then processed and visualized it using spreadsheets and charts to allow a deeper understanding and further analysis.
 
 ### Expectations
 
 Before collecting any data, I thought about what I expected to collect to see if my learning matches with what happens in the real world. In general, I expected a lot of automated attacks and scanning, as the system was on a residential network I was not likely to receive highly targeted manual intrusion attempts like a large corporation might. I expected lots of port scanning, brute-force credential attacks, and some commands executed if sign-in was successful. 
 
 ## Organization
-I ran the honeypot on an old HP Pavilion laptop I have with a dedicated Ubuntu Server installation, and remotely managed it using SSH from a separate desktop. To simplify container deployment, I used Docker Compose to write files that spun up containers for me. The main service used is Cowrie, an open-source SSH/Telnet honeypot that emulates a vulnerable Linux server. It allows attackers to sign in to a fake shell where it can record interactions and data about the attacker. 
+I ran the honeypot on an old HP Pavilion laptop I have with a dedicated Ubuntu Server installation, and remotely managed it using SSH from a separate desktop. To simplify container deployment, I used Docker Compose to write files that spun up containers for me. The main service used is <a href="https://github.com/cowrie/cowrie">Cowrie,</a> an open-source SSH/Telnet honeypot that emulates a vulnerable Linux server. It allows attackers to sign in to a fake shell where it can record interactions and data about the attacker. 
 
 <p align="center">
   <img width="1390" height="576" alt="image" src="https://github.com/user-attachments/assets/f47a253f-0e99-4cbd-859d-7b57641f3501" />
@@ -53,7 +53,7 @@ Additionally, Cowrie is an emulated Linux environment, not an actual vulnerable 
 
 ### Conpot
 
-I was originally going to include Conpot, another open-source honeypot that emulates industrial control systems, but after a 24-hour test period I got no results. I was able to verify a connection from an external network, but got no hits other than my own. I believe this is because attackers would likely not target residential IP ranges with industrial protocols and systems, so I decided not to include it for the final test.
+I was originally going to include <a href="https://github.com/mushorg/conpot">Conpot,</a> another open-source honeypot that emulates industrial control systems, but after a 24-hour test period I got no results. I was able to verify a connection from an external network, but got no hits other than my own. I believe this is because attackers would likely not target residential IP ranges with industrial protocols and systems, so I decided not to include it for the final test.
 
 
 ## Results
@@ -87,7 +87,7 @@ The top source was 20 IP addresses on the same network, likely data center infra
 <p align="center">
   <img width="952" height="798" alt="image" src="https://github.com/user-attachments/assets/0781cb6c-bd24-4692-b9ff-df240b18c460" />
   <br/>
-  The top source IP I found was reported over 1000 times on AbuseIPDB and has a 100% confidence of abuse.
+  The top source IP I found was reported over 1000 times on <a href="https://www.abuseipdb.com/check/31.40.204.166">AbuseIPDB</a> and has a 100% confidence of abuse.
 </p>
 
 <img width="1237" height="753" alt="image" src="https://github.com/user-attachments/assets/d1adc16b-a25f-461e-83f4-0e6b2a468f26" />
@@ -169,7 +169,7 @@ b9e643a8e78d2ce745fbe73eb505c8a0cc49842803077809b2267817979d10b0
 </p>
 
 
-Searching this on VirusTotal revealed it as an ELF Executable, and was flagged as malicious by 40/62 antivirus engines as well as a negative community reputation, strongly suggesting it is malware. Most of the engines classified it as a coin miner or trojan, and dynamic analysis from Zenbox mapped 20 MITRE ATT&CK techniques to this malware.
+Searching this on <a href="https://www.virustotal.com/gui/file/b9e643a8e78d2ce745fbe73eb505c8a0cc49842803077809b2267817979d10b0/detection">VirusTotal</a> revealed it as an ELF Executable, and was flagged as malicious by 40/62 antivirus engines as well as a negative community reputation, strongly suggesting it is malware. Most of the engines classified it as a coin miner or trojan, and dynamic analysis from Zenbox mapped 20 MITRE ATT&CK techniques to this malware.
 
 <p align="center">
   <img width="1390" height="697" alt="image" src="https://github.com/user-attachments/assets/50193a3a-a19f-4ab2-9c57-c64c45e7d817" />
