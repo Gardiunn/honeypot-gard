@@ -169,7 +169,7 @@ b9e643a8e78d2ce745fbe73eb505c8a0cc49842803077809b2267817979d10b0
 </p>
 
 
-Searching this on <a href="https://www.virustotal.com/gui/file/b9e643a8e78d2ce745fbe73eb505c8a0cc49842803077809b2267817979d10b0/detection">VirusTotal</a> revealed it as an ELF Executable, and was flagged as malicious by 40/62 antivirus engines as well as a negative community reputation, strongly suggesting it is malware. Most of the engines classified it as a coin miner or trojan, and dynamic analysis from Zenbox mapped 20 MITRE ATT&CK techniques to this malware.
+Searching this on <a href="https://www.virustotal.com/gui/file/b9e643a8e78d2ce745fbe73eb505c8a0cc49842803077809b2267817979d10b0/detection">VirusTotal</a> revealed it as an ELF Executable, and was flagged as malicious by 40/62 antivirus engines as well as a negative community reputation, strongly suggesting it is malware. Most of the engines classified it as a coin miner or trojan, and dynamic analysis from Zenbox mapped 20 <a href="https://attack.mitre.org/">MITRE ATT&CK</a> techniques to this malware.
 
 <p align="center">
   <img width="1390" height="697" alt="image" src="https://github.com/user-attachments/assets/50193a3a-a19f-4ab2-9c57-c64c45e7d817" />
