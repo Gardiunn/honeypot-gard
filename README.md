@@ -1,5 +1,7 @@
 # Public SSH Honeypot Analysis
 
+There are no raw logs, files, or malware samples included in this repository, only the writeup and supporting documents for analysis.
+
 ## Project Overview
 I deployed a public-facing SSH honeypot on a residential network using Cowrie and Docker to collect and analyze the data from it. My goal for this project was to observe and analyze attacker activity on a normal network to better understand how attackers and automated systems behave in the real world.
 
