@@ -72,8 +72,8 @@ Data shows the activity was not evenly distributed across the collection period,
 
 Analysis of the authentication methods used  revealed the automated behavior I was expecting, most frequently seeing credentials like root, admin, and 123456. Large numbers of sessions from different sources all doing the same thing points to botnets or other malware campaigns automatically scanning with dictionaries containing common credentials.
 
-<img width="475" height="300" alt="image" src="https://github.com/user-attachments/assets/363bbec1-7c92-4891-adb2-eb76240532f1" />
-<img width="475" height="300" alt="image" src="https://github.com/user-attachments/assets/15fe268e-f133-45af-8849-ac3a77ef7b38" />
+<img width="450" height="300" alt="image" src="https://github.com/user-attachments/assets/363bbec1-7c92-4891-adb2-eb76240532f1" />
+<img width="450" height="300" alt="image" src="https://github.com/user-attachments/assets/15fe268e-f133-45af-8849-ac3a77ef7b38" />
 <p align="center">
   <img width="1315" height="600" alt="image" src="https://github.com/user-attachments/assets/712009a4-0225-4980-a225-a9ecb3e6fc35" />
   Common Credentials
