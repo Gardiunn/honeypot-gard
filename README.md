@@ -12,11 +12,20 @@ Before collecting any data, I thought about what I expected to collect to see if
 ## Organization
 I ran the honeypot on an old HP Pavilion laptop I have with a dedicated Ubuntu Server installation, and remotely managed it using SSH from a separate desktop. To simplify container deployment, I used Docker Compose to write files that spun up containers for me. The main service used is Cowrie, an open-source SSH/Telnet honeypot that emulates a vulnerable Linux server. It allows attackers to sign in to a fake shell where it can record interactions and data about the attacker. 
 
+<p align="center">
+  <img width="1390" height="576" alt="image" src="https://github.com/user-attachments/assets/f47a253f-0e99-4cbd-859d-7b57641f3501" />
+  Starting Cowrie and an open SSH session "authenticated" in the fake shell
+</p>
+
+
 Cowrie was configured to expose the fake SSH service on port 2222 and Telnet on port 2223, while the home router was configured to port forward traffic from ports 22 and 23 to the honeypot container, ensuring malicious traffic could only access the emulated environment and not the actual host. 
 
 Cowrie generates JSON logs containing data such as usernames, passwords, source IP, commands, and files downloaded. It also stores terminal activity when attackers sign in and any payloads that are downloaded, allowing deeper analysis on attacker behavior. Simultaneously, a tcpdump was being run in the background using tmux to gather raw network data as a PCAP which could be used later to connect network activity with the Cowrie logs.
+<p align="center">
+  <img width="1000" height="645" alt="image" src="https://github.com/user-attachments/assets/32af24f9-cc93-49ed-93bf-4152037d1a82" />
+  Some of the first traffic received
+</p>
 
-<img width="604" height="418" alt="image" src="https://github.com/user-attachments/assets/041fbff0-70d2-4a93-9d5a-712cbe7b8cbc" />
 
 Finally, the collected data was put into a spreadsheet to generate pivot tables and charts to visualize the data. This helped me to analyze trends like most common login combinations or to perform geographic mapping on the source IPs.
 
@@ -54,20 +63,34 @@ I was originally going to include Conpot, another open-source honeypot that emul
 During the 72 hour period, the honeypot collected tens of thousands of unsolicited SSH connection attempts from around the world. Cowrie generated JSON formatted logs containing data about these attempts such as credentials, terminal activity, and files downloaded. Using Python scripts I consolidated this data into a CSV spreadsheet to further analyze it using pivot tables and charts. 
 
 Data shows the activity was not evenly distributed across the collection period, actually appearing largely in bursts, suggesting waves of automated scans.
-
-<img width="1134" height="715" alt="image" src="https://github.com/user-attachments/assets/8158eb28-d113-46af-99de-7f76602530be" />
+<p align="center">
+  <img width="1134" height="715" alt="image" src="https://github.com/user-attachments/assets/8158eb28-d113-46af-99de-7f76602530be" />
+  Connections Per Hour
+</p>
 
 
 
 Analysis of the authentication methods used  revealed the automated behavior I was expecting, most frequently seeing credentials like root, admin, and 123456. Large numbers of sessions from different sources all doing the same thing points to botnets or other malware campaigns automatically scanning with dictionaries containing common credentials.
 
 <img width="500" height="300" alt="image" src="https://github.com/user-attachments/assets/363bbec1-7c92-4891-adb2-eb76240532f1" />
-<img width="500" height="300" alt="image" src="https://github.com/user-attachments/assets/8d08e7ff-d00c-4545-b97d-e5f7c859c825" />
+<img width="500" height="300" alt="image" src="https://github.com/user-attachments/assets/15fe268e-f133-45af-8849-ac3a77ef7b38" />
+<p align="center">
+  <img width="1315" height="600" alt="image" src="https://github.com/user-attachments/assets/712009a4-0225-4980-a225-a9ecb3e6fc35" />
+  Common Credentials
+</p>
+
 
 
 Additionally, source IP analysis from each connection attempt showed many attempts from a fairly small number of systems. Each one had a source IP, and using geolocation mapping I was able to show the global infrastructure. It is important to keep in mind this geolocation is not entirely accurate, and very likely reflects the locations of compromised systems, virtual private servers, or a distributed botnet, not the true origin of the attackers.
 
 <img width="1237" height="753" alt="image" src="https://github.com/user-attachments/assets/d1adc16b-a25f-461e-83f4-0e6b2a468f26" />
+<p align="center">
+  <img width="1066" height="873" alt="image" src="https://github.com/user-attachments/assets/faca0436-8456-45bd-b198-3b6cf9b2bd0b" />
+  Top 50 Source IP addresses and their region
+</p>
+
+
+
 
 
 Finally, looking at each event showed the overwhelming majority as a very quick connection attempt to verify authentication or command execution rather than spending time interacting with the fake shell. Again, this aligns with automated opportunistic scanning to find and target publicly exposed and vulnerable SSH services.
@@ -82,11 +105,20 @@ Activity within the fake shell environment such as executing commands millisecon
 
 Many scans were simply for reconnaissance, running commands such as cat /proc/cpuinfo or ifconfig to gather data about the target. They can determine processor, available interfaces, current load, or signed-in users on the system. This reconnaissance is often to determine if a found vulnerable host is actually suitable for malware or further attacks.
 
-<img width="1387" height="667" alt="image" src="https://github.com/user-attachments/assets/5704755a-6ecf-4b3c-bc43-1a4d08baca09" />
+<p align="center">
+  <img width="1387" height="667" alt="image" src="https://github.com/user-attachments/assets/5704755a-6ecf-4b3c-bc43-1a4d08baca09" />
+  Gather info about the "host"
+</p>
 
-<img width="1390" height="628" alt="image" src="https://github.com/user-attachments/assets/dbd457f1-79ec-4a41-95a8-373f6a8a10bc" />
+<p align="center">
+  <img width="1390" height="628" alt="image" src="https://github.com/user-attachments/assets/dbd457f1-79ec-4a41-95a8-373f6a8a10bc" />
+  Gather info about the network
+</p>
 
-<img width="1390" height="141" alt="image" src="https://github.com/user-attachments/assets/ee78b60a-41d0-4c28-a2a5-e92e504386c8" />
+<p align="center">
+  <img width="1390" height="141" alt="image" src="https://github.com/user-attachments/assets/ee78b60a-41d0-4c28-a2a5-e92e504386c8" />
+  Gather info about signed-in users
+</p>
 
 
 #### Persistence
@@ -124,11 +156,18 @@ Cowrie was able to capture six attempted downloads after user authentication. Fi
 
 b9e643a8e78d2ce745fbe73eb505c8a0cc49842803077809b2267817979d10b0
 
-<img width="1387" height="264" alt="image" src="https://github.com/user-attachments/assets/018cf4f9-2a28-4bdb-9a96-fc6b2bf783bb" />
+<p align="center">
+  <img width="1387" height="264" alt="image" src="https://github.com/user-attachments/assets/018cf4f9-2a28-4bdb-9a96-fc6b2bf783bb" />
+  Files Collected
+</p>
+
 
 Searching this on VirusTotal revealed it as an ELF Executable, and was flagged as malicious by 40/62 antivirus engines as well as a negative community reputation, strongly suggesting it is malware. Most of the engines classified it as a coin miner or trojan, and dynamic analysis from Zenbox mapped 20 MITRE ATT&CK techniques to this malware.
 
-<img width="1390" height="697" alt="image" src="https://github.com/user-attachments/assets/50193a3a-a19f-4ab2-9c57-c64c45e7d817" />
+<p align="center">
+  <img width="1390" height="697" alt="image" src="https://github.com/user-attachments/assets/50193a3a-a19f-4ab2-9c57-c64c45e7d817" />
+  VirusTotal Results
+</p>
 
 ## Conclusion
 
