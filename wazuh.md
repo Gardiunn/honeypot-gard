@@ -27,11 +27,11 @@ T1105 - Ingress Tool Transfer
 
 T1090 - Proxy
 
-<p align="center">
-  <img width="450" height="500" alt="image" src="https://github.com/user-attachments/assets/6efa800c-0ed8-4367-afb7-a2b1bcb5c4e1" />
+  <img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/6efa800c-0ed8-4367-afb7-a2b1bcb5c4e1" />
 
-  <img width="450" height="500" alt="image" src="https://github.com/user-attachments/assets/d00f10da-36a3-45eb-8fb6-30a96e2f3b61" />
-  Custom Detection Rules
+  <img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/d00f10da-36a3-45eb-8fb6-30a96e2f3b61" />
+<p align="center">
+  Custom Wazuh Detection Rules
 </p>
 
 Custom rules: ([`local_rules.xml`](local_rules.xml))
