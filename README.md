@@ -7,6 +7,12 @@ I deployed a public-facing SSH honeypot on a residential network using Cowrie an
 
 During the 72-hour collection period, the honeypot recorded 36,433 total Cowrie events and 5,672 SSH sessions from sources around the world. These sessions included authentication attempts, command execution, and attempted payload downloads. I then processed the collected data into spreadsheets with tables and visualized the results with charts to identify patterns in attacker behavior.
 
+### Wazuh SIEM Integration
+
+I later expanded this Cowrie SSH honeypot into a small SOC-style monitoring setup using Wazuh. This added log ingestion, custom Cowrie detection rules, MITRE ATT&CK mappings, and a filtered dashboard view for reviewing honeypot alerts.
+
+Writeup here: [Wazuh SIEM Integration](wazuh/wazuh-integration.md)
+
 
 ## Organization
 I ran the honeypot on an old HP Pavilion laptop with a dedicated Ubuntu Server installation, and remotely managed it over SSH from a separate desktop. To simplify deployment and isolate the honeypot from the host, I used Docker Compose to define scripts to start up the containerized services. The main service used is <a href="https://github.com/cowrie/cowrie">Cowrie</a>, an open-source SSH/Telnet honeypot that emulates a vulnerable Linux server. Cowrie shows attackers a fake shell environment which records any interactions they attempt to make. 
