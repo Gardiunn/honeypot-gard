@@ -11,7 +11,7 @@ During the 72-hour collection period, the honeypot recorded 36,433 total Cowrie 
 
 I later expanded this Cowrie SSH honeypot into a small SOC-style monitoring setup using Wazuh. This added log ingestion, custom Cowrie detection rules, MITRE ATT&CK mappings, and a filtered dashboard view for reviewing honeypot alerts.
 
-Writeup here: [Wazuh SIEM Integration](wazuh/wazuh-integration.md)
+Writeup here: [Wazuh SIEM Integration](wazuh.md)
 
 
 ## Organization
