@@ -1,0 +1,88 @@
+<!-- Local rules -->
+
+<!-- Modify it at your will. -->
+<!-- Copyright (C) 2015, Wazuh Inc. -->
+
+<!-- Example -->
+<group name="local,syslog,sshd,">
+
+  <!--
+  Dec 10 01:02:02 host sshd[1234]: Failed none for root from 1.1.1.1 port 1066 ssh2
+  -->
+  <rule id="100001" level="5">
+    <if_sid>5716</if_sid>
+    <srcip>1.1.1.1</srcip>
+    <description>sshd: authentication failed from IP 1.1.1.1.</description>
+    <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,</group>
+  </rule>
+
+</group>
+
+
+<group name="local,cowrie,">
+
+  <rule id="100010" level="3">
+    <field name="eventid">cowrie.session.connect</field>
+    <description>Cowrie SSH connection detected</description>
+    <mitre>
+      <id>T1133</id>
+    </mitre>
+  </rule>
+
+  <rule id="100011" level="5">
+    <field name="eventid">cowrie.login.failed</field>
+    <description>Cowrie failed login attempt</description>
+    <mitre>
+      <id>T1110</id>
+    </mitre>
+  </rule>
+
+  <rule id="100012" level="5">
+    <field name="eventid">cowrie.login.success</field>
+    <description>Cowrie successful honeypot login</description>
+    <mitre>
+      <id>T1110</id>
+    </mitre>
+  </rule>
+
+  <rule id="100013" level="7">
+    <field name="eventid">cowrie.command.input</field>
+    <description>Cowrie command executed in Cowrie honeypot</description>
+    <mitre>
+      <id>T1059.004</id>
+    </mitre>
+  </rule>
+
+  <rule id="100014" level="7">
+    <field name="eventid">cowrie.direct-tcpip.request</field>
+    <description>Cowrie tcp/ip proxy request</description>
+    <mitre>
+      <id>T1090</id>
+    </mitre>
+  </rule>
+
+  <rule id="100015" level="12">
+    <field name="eventid">cowrie.session.file_upload</field>
+    <description>Cowrie upload attempt detected</description>
+    <mitre>
+      <id>T1105</id>
+    </mitre>
+  </rule>
+
+  <rule id="100016" level="12">
+    <field name="eventid">cowrie.session.file_download</field>
+    <description>Cowrie download attempt detected</description>
+    <mitre>
+      <id>T1105</id>
+    </mitre>
+  </rule>
+
+  <rule id="100014" level="7">
+    <field name="eventid">cowrie.direct-tcpip.request</field>
+    <description>Cowrie tcp/ip proxy request</description>
+    <mitre>
+      <id>T1090</id>
+    </mitre>
+  </rule>
+
+</group>
